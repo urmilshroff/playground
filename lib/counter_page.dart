@@ -8,20 +8,29 @@ class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CounterCubit(),
-      child: BlocBuilder<CounterCubit, int>(
-        builder: (context, state) => Scaffold(
-          body: Center(
-            child: Text(
-              state.toString(),
-              style: const TextStyle(fontSize: 32),
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: () => context.read<CounterCubit>().incrementCounter(),
-          ),
-        ),
+      create: (context) => CounterCubit(),
+      child: const CounterView(),
+    );
+  }
+}
+
+class CounterView extends StatelessWidget {
+  const CounterView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: BlocBuilder<CounterCubit, int>(builder: (context, state) {
+          return Text(
+            state.toString(),
+            style: const TextStyle(fontSize: 32),
+          );
+        }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () => context.read<CounterCubit>().incrementCounter(),
       ),
     );
   }
