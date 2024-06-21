@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:playground/counter_observer.dart';
+import 'package:playground/counter_page.dart';
 
 void main() {
+  Bloc.observer = const CounterObserver();
   runApp(const MyApp());
 }
 
@@ -9,14 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Playground',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
-        useMaterial3: true,
-      ),
-      home: Container(),
+      home: CounterPage(),
     );
   }
 }
